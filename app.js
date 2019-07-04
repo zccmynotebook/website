@@ -7,9 +7,9 @@ let str=list.map(v=>{
 let data=`
 <html>
 <body>
-<ul>
+<ol>
 ${str.join(' ')}
-</ul>
+</ol>
 </body>
 </html>
 `
