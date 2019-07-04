@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head> 
+
+<script>
+    function notifyMe() {
+        // Let's check if the browser supports notifications
+        if (!("Notification" in window)) {
+            alert("This browser does not support desktop notification");
+        }
+
+        // Let's check whether notification permissions have already been granted
+        else if (Notification.permission === "granted") {
+            // If it's okay let's create a notification
+            var options = {
+                body: "this is content The URL of the image used to represent the notification when there is not enough space to display thenotification itself.",
+                icon: 'icon.gif',
+                badge:"icon.gif"
+            }
+            var notification = new Notification("title!",options);
+            notification.onclick=function(){
+                alert("hi")
+            }
+            setTimeout(function(){
+                notification.close();
+            },10000)
+        }
+
+        // Otherwise, we need to ask the user for permission
+        else if (Notification.permission !== 'denied') {
+            Notification.requestPermission(function (permission) {
+                // If the user accepts, let's create a notification
+                if (permission === "granted") {
+                    var notification = new Notification("Hi there!");
+                }
+            });
+        }
+
+        // At last, if the user has denied notifications, and you
+        // want to be respectful there is no need to bother them any more.
+    }
+</script>
+</head>
+<body>
+    <h3>Notification使用</h3>
+<button onclick="notifyMe()">Notify me!</button>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head> 
+
+</head>
+<body>
+<h3 id="time"></h3>
+<button onclick="getTime()">Notify me!</button>
+
+<script>
+    var time=document.getElementById('time')
+  var xhr=new XMLHttpRequest()
+  function getTime(){
+    xhr.open('get','/time?a=1&b=2')
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState==4&&xhr.status==200){
+         time.innerHTML=xhr.response
+      }
+    }
+    xhr.send('c=3')
+  }
+
+</script>
+</body>
+</html>
