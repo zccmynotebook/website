@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head> 
+  <style>
+    .shadow{
+      box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6)
+    }
+  </style>
+</head>
+<body>
+ <span class="shadow">box-shawdow妙用</span>
+ <input type="text" />
+ <p id="test" style="">
+  box-shawdow蒙版：页面被覆盖，但是不影响下面的元素交互；
+ </p>
+ <script>
+ let t=document.getElementById('test')
+ t.onclick=function(){
+   alert('click')
+ }
+ </script>
+</body>
+</html>
