@@ -1,0 +1,72 @@
+.wth{
+  display: inline-block;
+  margin-right:20px;
+  width:200px;
+  height: 200px;
+  background-color: aqua;
+  position: relative;
+}
+
+.sunny .tri{
+  position: absolute;
+  /* width:90px;
+  height: 90px; */
+  left:40px;
+  border:60px solid transparent;
+  animation: sunScale 2s linear 0s infinite;
+}
+.sunny .up{
+   border-top:100px solid  yellow;
+   top:70px;
+}
+.sunny .down{
+  border-bottom:100px solid yellow;
+  top:-30px;
+}
+.sun{
+  position: absolute;
+  border:40px solid orange;
+  border-radius: 40px;
+  top:60px;
+  left:60px;
+  box-shadow: 0 0 20px orange;
+}
+.shine{
+  width:80px;
+  height: 80px;
+  background-color: yellow;
+  transform: rotate(45deg);
+  position: absolute;
+  top:60px;
+  left:60px;
+  box-shadow: 10px yellow;
+  animation: sunScale1 2s linear 0s infinite;
+}
+
+
+
+
+@keyframes sunScale1 {
+  0% {
+      transform: rotate(45deg) scale(1);
+  }
+  50% {
+    transform:rotate(45deg) scale(0.9);
+  }
+  100% {
+      transform: rotate(45deg) scale(1);
+  }
+}
+
+@keyframes sunScale {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
