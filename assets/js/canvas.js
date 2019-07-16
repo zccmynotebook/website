@@ -17,5 +17,5 @@ preview.onclick=function(){
 save.onclick=function(){
    let i=canvas.toDataURL('image/png')
    save.href=i;
-   save.click()
+  
 }
