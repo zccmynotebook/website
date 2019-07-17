@@ -9,12 +9,22 @@
     figure{
       width:100px;
       text-align: center;
+      float: left;
     }
     canvas{
       background-color: #fff;
+      float:left;margin-left:200px
+    }
+    canvas::after{
+      content: '';
+      display: block;
+      clear: both;
     }
     a{
       cursor: pointer;
+    }
+    .ml{
+      margin-left: 20px;
     }
   </style>
 </head>
@@ -25,8 +35,8 @@
 <canvas width="100px" height="100px" id="canvas"></canvas>
 <div>
   <input type="text" id="txt" placeholder="输入文字,不超过5个字" value="要你管"/>
-  <a id='preview'>预览</a>
-  <a id='save' download="look.png">保存图片</button>
+  <a id='preview' class="ml">预览</a>
+  <a id='save' download="look.png"  class="ml">保存图片</button>
 </div>
 <script src="../assets/js/canvas.js"></script>
 </body>
