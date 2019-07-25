@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head> 
+  <style>
+    
+  </style>
+</head>
+<body>
+  <p>当我们用到 fill（或者 clip和isPointinPath ）可以选择一个填充规则，
+    该填充规则根据某处在路径的外面或者里面来决定该处是否被填充，这对于自己与自己路径相交或者路径被嵌套的时候是有用的。
+两个可能的值： "nonzero": 默认值. "evenodd":</p>
+<canvas></canvas>
+<script>
+  let cv=document.querySelector('canvas')
+  let cxt=cv.getContext('2d')
+  cxt.beginPath();
+  let cl=cxt.createLinearGradient(10,10,200,150)
+  cl.addColorStop(0,'red')
+  cl.addColorStop(1,'green')
+  cxt.fillStyle=cl;
+  cxt.arc(100,100,50,0,Math.PI*2,true);
+  cxt.arc(100,100,20,0,Math.PI*2,true);
+  cxt.fill("evenodd");
+</script>
+</body>
+</html>
