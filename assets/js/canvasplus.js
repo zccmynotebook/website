@@ -8,7 +8,7 @@ let canvas=document.querySelector('#canvas')
 let ctx=canvas.getContext('2d');
 ctx.font="16px Georgia";
 let txtwidth=ctx.measureText(txt.value).width
-canvas.width=txtwidth
+//canvas.width=txtwidth
 img.crossOrigin="anonymous";
 img.setAttribute("crossOrigin",'Anonymous')
 preview.onclick=function(){
