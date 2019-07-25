@@ -15,9 +15,9 @@ preview.onclick=function(){
    getImg() 
 }
 save.onclick=function(){
-   ctx.clearRect(0,0,100,100)
+   ctx.clearRect(0,0,canvas.width,canvas.height)
    ctx.drawImage(img,0,0,80,80)
-   ctx.fillText(txt.value,12,96,txtwidth)
+   ctx.fillText(txt.value,12,96,100)
    let i=canvas.toDataURL('image/png')
    save.href=i; 
 }
