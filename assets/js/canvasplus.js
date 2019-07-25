@@ -13,7 +13,9 @@ img.crossOrigin="anonymous";
 img.setAttribute("crossOrigin",'Anonymous')
 preview.onclick=function(){
    getImg() 
+   caption.textContent=txt.value
 }
+file.oninput=getImg
 save.onclick=function(){
    ctx.clearRect(0,0,canvas.width,canvas.height)
    ctx.drawImage(img,0,0,80,80)
@@ -26,7 +28,6 @@ function getImg(){
    reader.readAsDataURL(file.files[0])
    reader.onload=function(e){
       img.src=e.target.result
-   }
-   caption.textContent=txt.value
+   }  
 }
  
