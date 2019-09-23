@@ -23,5 +23,68 @@
   cxt.fill("evenodd");
 </script>
 <img src="../assets/img/axiox@2x.png" width="600px"/>
+<p>这里的平移变换实质就是在平移坐标系</p>
+<canvas id="canvas1"></canvas>
+<script>
+var canvas = document.getElementById("canvas1");
+        canvas.width = 800;
+        canvas.height = 600;
+        var context = canvas.getContext("2d");
+        context.fillStyle = "#Ff0";
+        context.fillRect(0,0,800,500);
+        context.font="30px simsum"
+        context.fillStyle = "#F00";
+        context.fillText('这里的平移变换实质就是在平移坐标系',100,400,800)
+        context.fillStyle = "#00AAAA";
+        context.fillRect(100,100,200,100);
+
+        context.fillStyle = "red";
+        context.translate(100,100);
+        context.fillRect(100,100,200,100);
+</script>
+<canvas id="canvas"></canvas>
+<script>
+ var canvas = document.getElementById("canvas");
+        canvas.width = 800;
+        canvas.height = 600;
+        var context = canvas.getContext("2d");
+        context.fillStyle = "#FFF";
+        context.fillRect(0,0,800,600);
+
+        //在屏幕上绘制一个大方块
+        context.fillStyle = "black";
+        context.fillRect(10,10,200,200);
+        context.save();
+        context.beginPath();
+
+        //裁剪画布从(0，0)点至(50，50)的正方形
+        context.rect(0,0,50,50);
+        context.clip();
+
+        //红色圆
+        context.beginPath();
+        context.strokeStyle = "red";
+        context.lineWidth = 5;
+        context.arc(100,100,100,0,Math.PI * 2,false);
+        //整圆
+        context.stroke();
+        context.closePath();
+
+        context.restore();
+
+        //再次裁切整个画布
+        context.beginPath();
+        context.rect(0,0,500,500);
+        context.clip();
+
+        //绘制一个没有裁切的蓝线
+        context.beginPath();
+        context.strokeStyle = "blue";
+        context.lineWidth = 5;
+        context.arc(100,100,50,0,Math.PI * 2,false);
+        //整圆
+        context.stroke();
+        context.closePath();
+</script> 
 </body>
 </html>
