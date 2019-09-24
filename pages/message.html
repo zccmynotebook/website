@@ -1,0 +1,17 @@
+<body>
+  <div></div>
+  <script>
+    let w1=new Worker('../assets/js.worker/w1.js')
+    let w2=new Worker('../assets/js.worker/w2.js')
+    let ch=new MessageChannel()
+    w1.postMessage("port1", [ch.port1]);
+    w2.postMessage("port2", [ch.port2]);
+    w1.onmessage = function(e) {
+        console.log('nn',e.data);
+    }
+    w2.onmessage = function(e) {
+      document.querySelector('div').innerHTML = e.data
+        console.log('mm',e.data);
+    }
+  </script>
+</body>

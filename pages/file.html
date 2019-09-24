@@ -1,12 +1,15 @@
 <body>
   <script>
     let f=new File(['hello file'],'file.txt',{type: "text/plain",})
-    let url= window.URL.createObjectURL(f)
+    let url= URL.createObjectURL(f)
    
     let a=document.createElement('a');
     a.href=url;
     a.textContent='下载文件' 
     a.download="file1.txt"
     document.body.appendChild(a)
+    console.log('before',url)
+    URL.revokeObjectURL(url)
+    console.log('after',url)
    </script>
 </body>
