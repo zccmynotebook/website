@@ -1,0 +1,23 @@
+
+<button >显示普通对话框</button>
+<input type="button" value="显示模态对话框"/>
+<dialog>
+    <p>目前常用浏览器只有chrome支持</p>
+     <span>close</span>
+</dialog>
+<script>
+let d=document.querySelector('dialog')
+let b=document.querySelector('button')
+let p=document.querySelector('input')
+let c=document.querySelector('span')
+console.dir(d)
+b.onclick=function(){
+  d.show()
+}
+p.onclick=function(){
+  d.showModal()
+}
+c.onclick=function(){
+  d.close()
+}
+</script>

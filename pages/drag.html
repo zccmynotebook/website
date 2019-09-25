@@ -1,0 +1,96 @@
+<html>
+  <style>
+  div{
+    border:1px solid green;
+    margin-top:20px;
+  }
+  #src{
+    height:20px;
+    background: yellow;
+  }
+  #dest{
+    height: 60px;
+    background: green;
+  }
+  #file{
+   height:100px;
+  }
+  </style>
+  <body>
+    <button onclick="move">move</button>
+    <div style="height:20px"></div>
+    <script>
+     let cp=document.querySelector('div')
+     let bt=document.querySelector('button')
+     bt.onclick=function(){
+        cp.appendChild(bt)
+     }
+    </script>
+
+    <section>
+      <div id="src" draggable="true" ondragstart="start(event)"
+      ondragleave="leave(event)" ondragend="end(event)" ondragenter="enter(event,'src')">src</div>
+      <div id="dest" ondragover="over(event)" ondrop="drop(event)" ondragenter="enter(event,'dest')">dest</div>
+    </section>
+    <script>
+      function start(e){
+       let txt=`1.dropend 在drop后执行;2.行内事件的函数必须传递event,否则不执行;3.setData必须在dragstart事件里，其余地方不生效;
+       4.getData只在drop事件才能得到;5.ondragover要阻止默认行为，否则drop执行不到`
+       e.dataTransfer.setData("text", txt);
+       e.dataTransfer.setData("json", 'fork josn hhh');
+       e.dataTransfer.dropEffect='copy' //没看出效果
+       e.dataTransfer.effectAllowed="link"
+      }
+     function over(e){
+       e.preventDefault()
+       //写在这里没有效果
+       //e.dataTransfer.setData("text", 123);
+       console.log('over',e.dataTransfer.getData("text"))
+     }
+     function leave(e){
+       e.preventDefault()
+       //写在这里也没有效果
+       e.dataTransfer.setData("text", 123);
+       console.log('leave',e.dataTransfer.getData("text"))
+     }
+     function enter(e,msg){
+       e.preventDefault()
+       console.log(msg)
+       //写在这里也没有效果
+       e.dataTransfer.setData("text", 123);
+       console.log('enter',e.dataTransfer.getData("text"))
+     }
+     function drop(e){
+       e.preventDefault()
+       let txt=e.dataTransfer.getData("text");
+       let tt=e.dataTransfer.getData("json");
+       let m=document.getElementById('src')
+       m.textContent=txt+'---'+tt
+       document.getElementById('dest').appendChild(m)
+       console.log('drop',e.dataTransfer.getData("text"))
+     }
+     function end(e){
+      console.log('end')
+      console.log('end',e.dataTransfer.getData("text"))
+     }
+     
+    </script>
+
+    <div ondrop="dropfile(event)" ondragover="over(event)" id="file">
+      drop a file here；注意当从操作系统向浏览器中拖动文件时，不会触发 dragstart 和dragend 事件
+    </div>
+    <img />
+    <script>
+     let img=document.querySelector('img')
+     function dropfile(e){
+       // Prevent default behavior (Prevent file from being opened)
+       e.preventDefault()
+      let file=e.dataTransfer.files[0]
+      let url=URL.createObjectURL(file)
+      img.src=url;
+     }
+     
+
+    </script>
+  </body>
+</html>
