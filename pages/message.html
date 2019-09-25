@@ -4,21 +4,22 @@
     let w1=new Worker('../assets/js/worker/w1.js')
     let w2=new Worker('../assets/js/worker/w2.js')
     let ch=new MessageChannel()
-    w1.postMessage("port1", [ch.port1]);
+    let ch1=new MessageChannel()
+    w1.postMessage("port1", [ch.port1,ch1.port2]);
     w2.postMessage("port2", [ch.port2]);
     w1.onmessage = function(e) {
       document.querySelector('div').innerHTML +='<br/>from w1:'+ e.data
         console.log('nn',e.data);
     }
-    ch.port1.onmessage=function(e) {
-      document.querySelector('div').innerHTML +='<br/>from port1:'+ e.data      
-    }
-    ch.port2.onmessage=function(e) {
-      document.querySelector('div').innerHTML +='<br/>from port2:'+ e.data      
-    }
     w2.onmessage = function(e) {
       document.querySelector('div').innerHTML += '<br/>from w2:'+ e.data
         console.log('mm',e.data);
     }
+    
+    ch1.port1.onmessage=function(e) {
+      document.querySelector('div').innerHTML +='<br/>from ch1-port2:'+ e.data      
+    }
+    
+  
   </script>
 </body>
