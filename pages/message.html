@@ -7,11 +7,17 @@
     w1.postMessage("port1", [ch.port1]);
     w2.postMessage("port2", [ch.port2]);
     w1.onmessage = function(e) {
-      document.querySelector('div').innerHTML +='<br/>'+ e.data
+      document.querySelector('div').innerHTML +='<br/>from w1:'+ e.data
         console.log('nn',e.data);
     }
+    ch.port1.onmessage=function(e) {
+      document.querySelector('div').innerHTML +='<br/>from port1:'+ e.data      
+    }
+    ch.port2.onmessage=function(e) {
+      document.querySelector('div').innerHTML +='<br/>from port2:'+ e.data      
+    }
     w2.onmessage = function(e) {
-      document.querySelector('div').innerHTML += '<br/>'+ e.data
+      document.querySelector('div').innerHTML += '<br/>from w2:'+ e.data
         console.log('mm',e.data);
     }
   </script>
