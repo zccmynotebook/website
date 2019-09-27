@@ -17,7 +17,7 @@
   }
   </style>
   <body>
-    <button onclick="move">move</button>
+    <button onclick="move">click will move</button>
     <div style="height:20px"></div>
     <script>
      let cp=document.querySelector('div')
@@ -38,7 +38,7 @@
        4.getData只在drop事件才能得到;5.ondragover要阻止默认行为，否则drop执行不到`
        e.dataTransfer.setData("text", txt);
        e.dataTransfer.setData("json", 'fork josn hhh');
-       e.dataTransfer.dropEffect='copy' //没看出效果
+     
        e.dataTransfer.effectAllowed="link"
       }
      function over(e){
