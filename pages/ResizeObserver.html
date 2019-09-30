@@ -1,0 +1,28 @@
+<style>
+div{
+  border:20px green solid;
+  padding:10px;
+}
+section{
+  height:100px;
+}
+</style>
+<div>
+    ResizeObserver 接口可以监听到 Element 的内容区域或 SVGElement的边界框改变。内容区域则需要减去内边距padding,border。
+    ResizeObserver避免了在自身回调中调整大小，从而触发的无限回调和循环依赖。
+    它仅通过在后续帧中处理DOM中更深层次的元素来实现这一点。如果（浏览器）遵循规范，只会在绘制前或布局后触发调用。
+</div>
+<section>
+
+</section>
+<script>
+  let sc=document.querySelector('section')
+let ob=new ResizeObserver(entries=>{
+  for(let i of entries){
+    console.log(i)
+    sc.innerHTML +=`${i.target}:${i.contentRect.width}</br>`
+  }
+})
+ob.observe(document.querySelector('div'))
+ob.observe(sc)
+</script>

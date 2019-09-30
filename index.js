@@ -1,5 +1,6 @@
 const Koa = require('koa')
 const path = require('path')
+const fs=require('fs')
 const static = require('koa-static')
 //const Router = require('koa-router')
 
@@ -17,22 +18,32 @@ app.use(static(
 
 app.use( async ( ctx ) => {
   let url = ctx.url
-  // 从上下文的request对象中获取
-  let request = ctx.request
-  let req_query = request.query
-  let req_querystring = request.querystring
+  if(url.endsWith('html')){
+    ctx.type='text/html;charset=utf-8';
+    ctx.body=fs.readFileSync(`.${ctx.url}`)
+  }else if(url.endsWith('eventsource')){
+    ctx.type='text/event-stream;charset=utf-8';
+    ctx.body=`event: custom\n data: ${new Date()}\n\n`
+  } 
+  else{
+ // 从上下文的request对象中获取
+ let request = ctx.request
+ let req_query = request.query
+ let req_querystring = request.querystring
 
-  // 从上下文中直接获取
-  let ctx_query = ctx.query
-  let ctx_querystring = ctx.querystring
+ // 从上下文中直接获取
+ let ctx_query = ctx.query
+ let ctx_querystring = ctx.querystring
 
-  ctx.body = {
-    url,
-    req_query,
-    req_querystring,
-    ctx_query,
-    ctx_querystring
+ ctx.body = {
+   url,
+   req_query,
+   req_querystring,
+   ctx_query,
+   ctx_querystring
+ }
   }
+ 
   console.log(ctx)
 })
 

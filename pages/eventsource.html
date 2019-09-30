@@ -1,0 +1,27 @@
+<html>
+  <body>
+    <div>
+
+    </div>
+    <button>close es</button>
+    <script>
+      let div=document.querySelector('div')
+      let bt=document.querySelector('button')
+      let es=new EventSource('events')
+      es.onopen=function(){
+        div.innerHTML='open</br>'
+      }
+      es.onmessage=function(e){
+        div.innerHTML+=`${e.data}</br>`
+      }
+      es.onerror=function(){
+        console.log(123,arguments)
+        div.innerHTML+=`error</br>`
+      }
+      bt.onclick=function(){
+        es.close()
+        div.innerHTML+='close</br>'
+      }
+    </script>
+  </body>
+</html>

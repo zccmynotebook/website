@@ -1,0 +1,47 @@
+<ol>
+  <li>insertAdjacentHTML</li>
+  <li>insertAdjacentElement</li>
+  <li>insertAdjacentText</li>
+</ol>
+<ul>
+  <li>'beforebegin': 在该元素本身的前面.</li>
+  <li>'afterbegin':只在该元素当中, 在该元素第一个子孩子前面.</li>
+  <li>'beforeend':只在该元素当中, 在该元素最后一个子孩子后面.</li>
+  <li>'afterend': 在该元素本身的后面.</li>
+</ul>
+<style>
+ div,span{
+   float: left;
+   width:60px;
+   height:60px;
+   background: yellowgreen;
+ }
+ span{
+   background: orange;
+ }
+ span.small{
+  width:20px;
+   height:20px; 
+ }
+</style>
+<div></div>
+<button>insert before</button>
+<button>insert after</button>
+<button>insert inside</button>
+<script>
+ let bts=document.querySelectorAll('button')
+ let div=document.querySelector('div')
+ bts[0].onclick=function(){
+   let span=document.createElement('span')
+   div.insertAdjacentElement('beforebegin',span)
+ }
+ bts[1].onclick=function(){
+  let span=document.createElement('span')
+   div.insertAdjacentElement('afterend',span)
+ }
+ bts[2].onclick=function(){
+  let span=document.createElement('span')
+  span.classList.add('small')
+   div.insertAdjacentElement('beforeend',span)
+ }
+</script>

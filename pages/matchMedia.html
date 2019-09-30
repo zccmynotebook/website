@@ -1,0 +1,35 @@
+<html>
+  <head><title>
+    脚本判断媒体匹配
+  </title></head>
+  <style>
+   div{
+     height:100px;
+
+   }
+  </style>
+  <body>
+    <div>匹配字符串一定要加()，否则失效</div>
+    <script>    
+     let div=document.querySelector('div')
+     let b=document.body
+     let mm=window.matchMedia('(max-width:600px)')
+     function change(){
+        if(mm.matches){
+         b.style.background='red';
+        }else{
+          b.style.background='green';
+        }
+     }
+     let i=0
+     mm.onchange=function(){
+       console.log(i++)
+     }
+     change()
+     mm.addListener(function(){
+       console.log(arguments)
+     })
+     window.onresize=change
+    </script>
+  </body>
+</html>
