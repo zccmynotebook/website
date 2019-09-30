@@ -1,0 +1,47 @@
+<body>
+  <style>
+  img{
+    width:100px;
+    height:100px;
+  }
+  </style>
+  <img />
+  <script>
+  let img=document.querySelector('img')
+    fetch('/assets/img/boy.jpeg')
+    .then(res=>res.blob())
+    .then(blob=>URL.createObjectURL(blob))
+    .then(url=>img.src=url)
+  </script>
+  <p>下面目的是了解ReadableStream的用法</p>
+  <img id="img"/>
+  <script>
+    let img1=document.querySelector('#img')
+    fetch('/assets/img/sfz.jpg')
+    .then(res=>res.body)
+    .then(rs=>{
+      let reader=rs.getReader()
+      return new ReadableStream({
+        async start(controller) {
+          while (true) {
+            const { done, value } = await reader.read();
+            // When no more data needs to be consumed, break the reading
+            if (done) {
+              break;
+            }
+
+            // Enqueue the next data chunk into our target stream
+            controller.enqueue(value);
+          }
+
+          // Close the stream
+          controller.close();
+          reader.releaseLock();
+       }
+      })
+    }).then(rs=>new Response(rs))
+      .then(res=>res.blob())
+      .then(blob=>URL.createObjectURL(blob))
+      .then(url=>img1.src=url)
+  </script>
+</body>
