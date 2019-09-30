@@ -44,4 +44,64 @@
       .then(blob=>URL.createObjectURL(blob))
       .then(url=>img1.src=url)
   </script>
+  <button style="clear:both">stop</button>
+<main style="overflow: auto;">
+    <div style="float:left;width:200px;"> 
+        <h1>input</h1>
+        <ul></ul>
+    </div>
+    <div style="float:left;"> 
+        <h2>output</h1>
+        <ul></ul>
+    </div>
+</main>
+  
+  <script>
+    function getchar(){
+      let str=''
+      let char="BCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+      let l=char.length
+      for(let i=0;i<6;i++){
+        str+=char.charAt(Math.floor(Math.random()*l))
+      }
+      return str
+    }
+    let invl=null
+    let bt=document.querySelector('button')
+    const ul=document.querySelector('h1+ul')
+    const out=document.querySelector('h2+ul')
+    const stream=new ReadableStream({
+      start(controller){
+        invl=setInterval(function(){
+          let s=getchar()
+          controller.enqueue(s)
+          let li=document.createElement('li')
+          li.textContent=s
+          ul.appendChild(li)
+        },1000)
+
+        bt.onclick=function(){
+          clearInterval(invl)
+          controller.close()
+          readStream()
+        } 
+      }
+    })
+    
+    function readStream(){
+       let reader=stream.getReader()
+       let ll=0;
+       reader.read().then(function process({ done, value }){
+           if(done){
+            console.log("Stream complete");
+            return
+           }
+           ll+=value.length
+           let li=document.createElement('li')
+           li.textContent=`read ${value}, current size is ${ll} chars`
+           out.appendChild(li);
+           return reader.read().then(process)
+       })
+    }
+  </script>
 </body>
