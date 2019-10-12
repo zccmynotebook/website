@@ -1,0 +1,40 @@
+<p>
+  IntersectionObserver 可以用来监听元素是否进入了设备的可视区域之内，而不需要频繁的计算来做这个判断
+</p>
+<ul id="listItem"></ul>
+<script>
+  var target = document.querySelector('#listItem');
+  (function(){
+       let docs=document.createDocumentFragment()
+       for(let i=0;i<100;i++){
+         let li=document.createElement('li')
+         li.innerHTML=i;
+         docs.appendChild(li)
+       }
+       target.appendChild(docs)
+  })();
+var options = {
+    root: null, 
+    rootMargin: '0px', 
+    threshold: 1.0
+}
+var callback = function(entries, observer) { 
+  console.log(arguments)
+  entries.forEach(entry => {
+    console.log(entry)
+    // Each entry describes an intersection change for one observed
+    // target element:
+    //   entry.boundingClientRect
+    //   entry.intersectionRatio
+    //   entry.intersectionRect
+    //   entry.isIntersecting
+    //   entry.rootBounds
+    //   entry.target
+    //   entry.time
+  });
+};
+
+var observer = new IntersectionObserver(callback, options);
+
+observer.observe(target);
+</script>
