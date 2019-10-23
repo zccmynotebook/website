@@ -1,40 +1,47 @@
 <p>
-  IntersectionObserver 可以用来监听元素是否进入了设备的可视区域之内，而不需要频繁的计算来做这个判断
+  IntersectionObserver 可以用来监听元素是否进入了设备的可视区域之内，而不需要频繁的计算来做这个判断;
+root:所监听对象的具体祖先元素(element)。如果未传入值或值为null，则默认使用顶级文档的视窗。
+threshold:一个包含阈值的列表, 按升序排列, 列表中的每个阈值都是监听对象的交叉区域与边界区域的比率。
+  当监听对象的任何阈值被越过时，都会生成一个通知(Notification)。如果构造器未传入值, 则默认值为0。
+  rootMargin:计算交叉时添加到根(root)边界盒bounding box的矩形偏移量， 可以有效的缩小或扩大根的判定范围从而满足计算需要。
+  此属性返回的值可能与调用构造函数时指定的值不同，因此可能需要更改该值，以匹配内部要求。
+  所有的偏移量均可用像素(pixel)(px)或百分比(percentage)(%)来表达, 默认值为"0px 0px 0px 0px"。 
 </p>
 <ul id="listItem"></ul>
+<ul id="listItem1"></ul>
 <script>
   var target = document.querySelector('#listItem');
-  (function(){
-       let docs=document.createDocumentFragment()
-       for(let i=0;i<100;i++){
-         let li=document.createElement('li')
-         li.innerHTML=i;
-         docs.appendChild(li)
-       }
-       target.appendChild(docs)
-  })();
+  var target1 = document.querySelector('#listItem1');
+  target.appendChild(create(30))
+  target1.appendChild(create(30))
+ 
 var options = {
     root: null, 
     rootMargin: '0px', 
-    threshold: 1.0
+    threshold: 0.5
 }
 var callback = function(entries, observer) { 
-  console.log(arguments)
-  entries.forEach(entry => {
-    console.log(entry)
-    // Each entry describes an intersection change for one observed
-    // target element:
-    //   entry.boundingClientRect
-    //   entry.intersectionRatio
-    //   entry.intersectionRect
-    //   entry.isIntersecting
-    //   entry.rootBounds
-    //   entry.target
-    //   entry.time
+  //console.log(arguments)
+  entries.forEach(e=> {
+    if(e.isIntersecting){
+      console.log(e.target.id + ' 产生交互行为')
+      console.log(e.boundingClientRect)
+    }
   });
 };
 
 var observer = new IntersectionObserver(callback, options);
 
 observer.observe(target);
+observer.observe(target1)
+
+function create(size){
+    let docs=document.createDocumentFragment()
+    for(let i=0;i<size;i++){
+         let li=document.createElement('li')
+         li.innerHTML=i;
+         docs.appendChild(li)
+    }
+    return docs
+  }
 </script>

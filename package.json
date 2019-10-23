@@ -20,5 +20,9 @@
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0"
+  },
+  "devDependencies": {
+    "imagemin": "^7.0.0",
+    "imagemin-webpack-plugin": "^2.4.2"
   }
 }

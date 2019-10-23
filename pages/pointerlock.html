@@ -1,0 +1,119 @@
+<p>
+  即使在光标移到浏览器或者屏幕区域之外，指针锁定也能够让你访问鼠标事件。
+  例如，你的用户可以通过不断地移动鼠标来持续旋转或操纵一个 3D 模型。如果没有指针锁定的话，这些旋转或操纵会在指针到达浏览器或者屏幕边缘的那一刻停止。
+  尤其是游戏玩家将会因为此功能而兴奋不已，因为他们可以疯狂地点击按钮，来回地滑动鼠标光标，而不必担心离开了游戏区域，进而不小心误点到另外一个应用程序上，结果将鼠标焦点移离了游戏。
+</p>
+<style>
+#lock{
+  width:300px;
+  height:300px;
+  display: inline-block;
+  margin: 10px auto;
+  background: yellowgreen;
+}
+</style>
+<div id="lock">click，cursor will disappear</div>
+ 
+<script>
+let lock=document.getElementById('lock')
+lock.onclick=function(){
+  lock.requestPointerLock()
+}
+ 
+function pointerLockChange(){
+  if (!!document.pointerLockElement) {
+    console.log("目前还是被锁定。");
+  } else {
+    console.log("已经退出锁定。");
+  }
+}
+document.addEventListener('pointerlockchange', pointerLockChange, false);
+</script>
+ <style>
+ .box {
+  position: relative;
+}
+.box div {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+.item_1 {
+  top: 0;
+  left: 0;
+  background-color: rgba(248, 120, 120, 0.5);
+}
+.item_2 {
+  top: 20px;
+  left: 20px;
+  background-color: rgba(240, 248, 120, 0.5);
+}
+.item_3 {
+  top: 40px;
+  left: 40px;
+  background-color: rgba(120, 240, 248, 0.5);
+}
+.item_4 {
+  top: 60px;
+  left: 60px;
+  background-color: rgba(169, 120, 248, 0.5);
+}
+.item:hover {
+  outline: 2px dashed #000;
+  outline-offset: -2px;
+  border: 2px solid #fff;
+  animation: selectLine 300ms 0s infinite linear;
+}
+@keyframes selectLine {
+  0% {
+    outline-color: #000;
+    border-color: #fff;
+  }
+  40%,60% {
+    outline-color: transparent;
+    border-color: transparent;
+  }
+  100% {
+    outline-color: #fff;
+    border-color: #000;
+  }
+}
+#ct1:checked ~ .box .item_1,
+#ct2:checked ~ .box .item_2,
+#ct3:checked ~ .box .item_3,
+#ct4:checked ~ .box .item_4 {
+  pointer-events: none;
+}
+#ct1:checked ~ .ctrl_box .ctrl_item_1,
+#ct2:checked ~ .ctrl_box .ctrl_item_2,
+#ct3:checked ~ .ctrl_box .ctrl_item_3,
+#ct4:checked ~ .ctrl_box .ctrl_item_4 {
+  color: #f00;
+}
+.ctrl_box [class*="ctrl_item"]:hover {
+  color: #f05cf5;
+}
+.ctrl_box [class*="ctrl_item"] {
+  cursor: pointer;
+}
+input {
+  display: none;
+}
+ </style>
+<input type="checkbox" class="hidd_layout" id="ct1">
+<input type="checkbox" class="hidd_layout" id="ct2">
+<input type="checkbox" class="hidd_layout" id="ct3">
+<input type="checkbox" class="hidd_layout" id="ct4" checked>
+<div class="ctrl_box">
+  <label for="ct1" class="ctrl_item_1">锁定图层 1</label>
+  <label for="ct2" class="ctrl_item_2">锁定图层 2</label>
+  <label for="ct3" class="ctrl_item_3">锁定图层 3</label>
+  <label for="ct4" class="ctrl_item_4">锁定图层 4</label>
+</div>
+<div class="box">
+  <div class="item item_1">图层 1</div>
+  <div class="item item_2">图层 2</div>
+  <div class="item item_3">图层 3</div>
+  <div class="item item_4">图层 4</div>
+</div>

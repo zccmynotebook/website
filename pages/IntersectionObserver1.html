@@ -1,0 +1,39 @@
+<style>
+ul {
+  list-style: none;
+}
+img{
+  min-height:500px;
+}
+</style>
+<ul>
+  <li><img data-src="../assets/img/kn1.jpg"/></li>
+  <li><img data-src="../assets/img/kn2.jpg"/></li>
+  <li><img data-src="../assets/img/kn3.jpg"/></li>
+  <li><img data-src="../assets/img/kn4.jpg"/></li>
+  <li><img data-src="../assets/img/kn5.jpg"/></li>
+  <li><img data-src="../assets/img/kn6.jpg"/></li>
+  <li><img data-src="../assets/img/kn7.jpg"/></li>
+  <li><img data-src="../assets/img/kn8.jpg"/></li>
+</ul>
+
+<script>
+   let list=document.querySelectorAll('img')
+   var options = {
+    root: null, 
+    rootMargin: '0px', 
+    threshold: 1
+}
+var callback = function(entries, observer) { 
+  entries.forEach(e=> {
+    if(e.isIntersecting){
+      e.target.src=e.target.dataset.src  
+      obs.unobserve(e.target)   
+    }
+  });
+};
+   let obs=new IntersectionObserver(callback,options)
+   list.forEach(v=>{
+       obs.observe(v)
+   })
+</script>
