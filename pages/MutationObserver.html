@@ -1,3 +1,39 @@
 <p>
     MutationObserver接口提供了监视对DOM树所做更改的能力。它被设计为旧的Mutation Events功能的替代品，该功能是DOM3 Events规范的一部分。
+    MutationEvents事件是同步触发，也就是说，DOM 的变动立刻会触发相应的事件；
+Mutation Observer 则是异步触发，DOM 的变动并不会马上触发，而是要等到当前所有 DOM 操作都结束才触发。
 </p>
+<div id="content">66666</div>
+<script>
+let time = 4;
+let arr = new Array(time);
+let content = document.getElementById('content');
+let mutationObserver = new MutationObserver(obsCallback); // 创建实例
+mutationObserver.observe(content, {
+	    childList: true,
+	    subtree: true,
+    });
+
+obstruct(); // 执行阻塞
+
+// 完成创建
+function obsCallback(mutations, observer) {
+    console.log(`创建完成!`);
+    console.log(observer); // 观察者实例
+    console.log(mutations); // 变动数组
+}
+
+function obstruct() {
+  for (let i = 0; i < arr.length; i++) {
+		arr[i] = `<div>${i}</div>`;
+	}
+
+	arr.map((item, idx) => {
+		for(let i = 0; i < 3000; i++) console.log(1)
+		content.innerHTML += item;
+	});
+}
+ 
+ 
+</script>
+<a href="https://juejin.im/post/5db10695e51d452a091fde90" target="_blank">参考</a>

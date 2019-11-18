@@ -1,0 +1,18 @@
+<style>
+.outer {
+    width: 200px;
+    height: 100px;
+}
+.inner {
+    width: 60px;
+    height: 60px;
+    padding-top: 20%;
+}
+</style>
+请写出 inner 的实际高度(其实padding % 是用的父元素的宽度而非高度)
+<div class="outer"><div class="inner"></div></div>
+<script>
+var inner =document.querySelector('.inner')
+console.log(inner.clientHeight)
+
+</script>
