@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="./css/a.css"/>
+    </head>
+    <body>
+      this is a demo of service worker
+      <p><a href="new.html">new page without being cached</a></p>
+      <p><button id="btn">click</button></p>
+      <script>
+      if(navigator.serviceWorker){
+            window.onload=function(){
+                navigator.serviceWorker.register('/sw.js', { scope: '/' });
+            }
+      }
+      </script>
+    <script src="js/index.js"></script>
+    </body>
+</html>
