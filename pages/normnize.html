@@ -1,4 +1,5 @@
 <div id="a">normalize useage</div>
+<a target="_blank" href="eventsource.html">new page on localStorage</a>
 <script>
 let div=document.querySelector('#a');
 console.log('a',a.childNodes.length)
@@ -7,4 +8,9 @@ div.appendChild(new Text ('.cn'));
 console.log('b',a.childNodes.length)
 div.normalize()
 console.log('c',a.childNodes.length)
+
+localStorage.setItem('name','storage')
+setTimeout(function(){
+  localStorage.name = 'new value'
+},1000*10)
 </script>

@@ -1,8 +1,7 @@
 <html>
   <body>
-    <div>
-
-    </div>
+    <div></div>
+    <section></section>
     <button>close es</button>
     <script>
       let div=document.querySelector('div')
@@ -22,6 +21,10 @@
         es.close()
         div.innerHTML+='close</br>'
       }
+      let s=document.querySelector('section')
+      window.addEventListener('storage',function(v){
+        s.innerHTML = v
+      })
     </script>
   </body>
 </html>
