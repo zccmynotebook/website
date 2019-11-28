@@ -1,0 +1,40 @@
+<style>
+canvas{
+    border:1px solid #000;
+}
+#c1{
+    width:600px;
+    height:300px;
+}
+</style>
+<p>分别使用css和属性绘制同样大小的图</p>
+<canvas id="c1"></canvas>
+<canvas id="c2" width="600" height="300"></canvas>
+<canvas id="c3" width="600" height="300"></canvas>
+<img src="http://misc.360buyimg.com/mtd/pc/index_2019/1.0.0/assets/sprite/header/sprite@2x.png"/>
+<!-- <img src="/assets/img/boy.jpeg"/> -->
+<script>
+let c1=document.querySelector('#c1')
+let c2=document.querySelector('#c2')
+
+console.log('c1',c1.width)
+console.log('c2',c2.width)
+draw(c1)
+draw(c2)
+
+function draw(cvs){
+    let ctx1 = cvs.getContext('2d');
+    ctx1.fillStyle="#f0f"
+    ctx1.fillRect (30, 50, 100, 50) ;
+    ctx1.strokeRect (100, 30 , 100, 50); 
+    ctx1.clearRect(101 , 51, 28, 28) ;
+}
+window.onload=function(){
+    let c3=document.querySelector('#c3')
+    let ctx1 = c3.getContext('2d');
+    let img=document.querySelector('img')
+    let p=ctx1.createPattern(img,'no-repeat')
+    ctx1.fillStyle=p
+    ctx1.fillRect(0, 0, 300, 150);
+}
+</script>
