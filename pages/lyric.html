@@ -1,0 +1,32 @@
+<style>
+section{
+    position: relative;
+    padding: 0;
+    margin: 0;
+    width: 440px;
+}
+div{
+    font-size: 20px;
+    height: 25px;
+    overflow: hidden;
+}
+div:last-child{
+  color: green;
+  position: absolute;
+  top:0;
+  width:0;
+  animation: move 10s linear 2s;
+}
+@keyframes move{
+ from {
+     width: 0;
+ }
+ to{
+     width: 100%;
+ }
+}
+</style>
+<section>
+    <div>明月几时有,把酒问青天,不知天上宫阙,今夕是何年</div>
+    <div>明月几时有,把酒问青天,不知天上宫阙,今夕是何年</div>
+</section>

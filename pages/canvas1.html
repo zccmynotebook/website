@@ -11,6 +11,7 @@ canvas{
 <canvas id="c1"></canvas>
 <canvas id="c2" width="600" height="300"></canvas>
 <canvas id="c3" width="600" height="300"></canvas>
+<canvas id="c4" width="600" height="300"></canvas>
 <img src="http://misc.360buyimg.com/mtd/pc/index_2019/1.0.0/assets/sprite/header/sprite@2x.png"/>
 <!-- <img src="/assets/img/boy.jpeg"/> -->
 <script>
@@ -21,6 +22,11 @@ console.log('c1',c1.width)
 console.log('c2',c2.width)
 draw(c1)
 draw(c2)
+let c4=document.querySelector('#c4')
+let ctx = c4.getContext('2d');
+ctx.fillRect(30 , 30,50 , 50);
+ctx.scale(2,2)
+ctx.strokeRect(100,30,100,100);
 
 function draw(cvs){
     let ctx1 = cvs.getContext('2d');
