@@ -24,24 +24,35 @@ app.use( async ( ctx ) => {
   }else if(url.endsWith('eventsource')){
     ctx.type='text/event-stream;charset=utf-8';
     ctx.body=`event: custom\n data: ${new Date()}\n\n`
+  } else if(url.endsWith('test.css')){
+    async function delay(time) {
+       return new Promise(function(resolve, reject) {
+         setTimeout(function(){
+               resolve();
+              }, time);
+            });
+         };
+     await delay(5000);
+      ctx.type='text/css';
+      ctx.body=fs.readFileSync('./assets/css/test.css')
   } 
   else{
- // 从上下文的request对象中获取
- let request = ctx.request
- let req_query = request.query
- let req_querystring = request.querystring
+      // 从上下文的request对象中获取
+      let request = ctx.request
+      let req_query = request.query
+      let req_querystring = request.querystring
 
- // 从上下文中直接获取
- let ctx_query = ctx.query
- let ctx_querystring = ctx.querystring
+      // 从上下文中直接获取
+      let ctx_query = ctx.query
+      let ctx_querystring = ctx.querystring
 
- ctx.body = {
-   url,
-   req_query,
-   req_querystring,
-   ctx_query,
-   ctx_querystring
- }
+      ctx.body = {
+        url,
+        req_query,
+        req_querystring,
+        ctx_query,
+        ctx_querystring
+      }
   }
  
   console.log(ctx)
@@ -53,5 +64,5 @@ app.use( async ( ctx ) => {
 //   ctx.body = 'hello koa2'
 // })
 
-app.listen(3000)
+app.listen(3001)
 console.log('[demo] start-quick is starting at port 3000')

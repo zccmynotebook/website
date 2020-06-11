@@ -1,7 +1,16 @@
 <p>
     MutationObserver接口提供了监视对DOM树所做更改的能力。它被设计为旧的Mutation Events功能的替代品，该功能是DOM3 Events规范的一部分。
     MutationEvents事件是同步触发，也就是说，DOM 的变动立刻会触发相应的事件；
-Mutation Observer 则是异步触发，DOM 的变动并不会马上触发，而是要等到当前所有 DOM 操作都结束才触发。
+	Mutation Observer 则是异步触发，DOM 的变动并不会马上触发，而是要等到当前所有 DOM 操作都结束才触发。
+	
+	MutationRecords 的每一条都是一个变更记录，它是一个普通的对象，包含如下常用属性：
+	type: 变更的类型，attributes / characterData / childList
+	target: 发生变更的 DOM 元素
+	addedNodes: 新增子元素组成的 NodeList
+	removedNodes: 已移除子元素组成的的 NodeList
+	attributeName: 值发生改变的属性名，如果不是属性变更，则返回 null
+	previousSibling: 被添加或移除的子元素之前的兄弟节点
+	nextSibling: 被添加或移除的子元素之后的兄弟节点
 </p>
 <div id="content">66666</div>
 <script>
@@ -37,3 +46,4 @@ function obstruct() {
  
 </script>
 <a href="https://juejin.im/post/5db10695e51d452a091fde90" target="_blank">参考</a>
+<a href="https://mp.weixin.qq.com/s/riyUf0lW2nl1umtZs44Erw" target="_blank">参考</a>
