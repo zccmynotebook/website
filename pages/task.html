@@ -1,0 +1,51 @@
+<style>
+    div{
+        display: inline-block;
+    }
+.outer{
+    background-color: #ff0;
+    width:300px;
+    height: 300px;
+}
+.inner{
+    background-color: yellowgreen;
+    width:100px;
+    height: 100px;
+}
+</style>
+<div class="outer">
+<div class="inner">MutationObserver，promise同属于microtask,按出现的顺序执行；</div>
+</div>
+<script>
+// Let's get hold of those elements
+var outer = document.querySelector('.outer');
+var inner = document.querySelector('.inner');
+
+// Let's listen for attribute changes on the
+// outer element
+new MutationObserver(function () {
+  console.log('mutate');
+}).observe(outer, {
+  attributes: true,
+});
+
+// Here's a click listener…
+function onClick(e) {
+  console.log('click',e.target);
+
+  setTimeout(()=> {
+    console.log('timeout');
+  }, 0);
+
+  Promise.resolve(e).then(function () {
+    console.log('promise',e.target);
+  });
+
+  outer.setAttribute('data-random', Math.random());
+}
+
+// …which we'll attach to both elements
+inner.addEventListener('click', onClick);
+outer.addEventListener('click', onClick);
+
+</script>

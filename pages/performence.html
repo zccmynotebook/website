@@ -1,0 +1,42 @@
+<html>
+    <body>
+        <p>Performance使用</p>
+        <ol>
+            <li>performance.mark("开始标记");</li>
+            <li>performance.mark("结束标记");</li>
+            <li>测量两个不同的标志：performance.measure("自定义名称，下面会用"，"开始标记"，"结束标记");</li>
+            <li>使用测量结果</li>
+            <li>清除标记 
+                performance.clearMarks();
+                performance.clearMeasures();
+            </li>
+        </ol>
+    <script>
+      // 以一个标志开始。
+performance.mark("mySetTimeout-start");
+
+// 等待一些时间。
+setTimeout(function() {
+  // 标志时间的结束。
+  performance.mark("mySetTimeout-end");
+
+  // 测量两个不同的标志。
+  performance.measure(
+    "mySetTimeout",
+    "mySetTimeout-start",
+    "mySetTimeout-end"
+  );
+
+  // 获取所有的测量输出。
+  // 在这个例子中只有一个。
+  var measures = performance.getEntriesByName("mySetTimeout");
+  var measure = measures[0];
+  console.log("setTimeout milliseconds:", measure.duration)
+
+  // 清除存储的标志位
+  performance.clearMarks();
+  performance.clearMeasures();
+}, 1000);
+    </script>
+    </body>
+</html>
